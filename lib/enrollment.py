@@ -55,7 +55,21 @@ class Enrollment:
         for enrollment in cls.all:
             date = enrollment.get_enrollment_date().date()
             enrollment_count[date] = enrollment_count.get(date, 0) + 1
-        return enrollment_count   
+        return enrollment_count 
+
+def contributing_authors(self):
+        author_article_count = {}
+        # Count the number of articles each author has written for this magazine
+        for article in self._articles:
+            author = article.author
+            if author in author_article_count:
+                author_article_count[author] += 1
+            else:
+                author_article_count[author] = 1
+        
+        # Return authors who have written more than 2 articles
+        contributing_authors = [author for author, count in author_article_count.items() if count > 2]
+        return contributing_authors      
     
 
     def aggregate_average_grade(self):
